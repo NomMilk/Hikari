@@ -6,39 +6,51 @@ using UnityEngine.SceneManagement;
 public class InteractScript : MonoBehaviour
 {
         // Reference to the Renderer of the effect
-    [SerializeField] private GameObject something;
+    [SerializeField] private GameObject Screen;
+    [SerializeField] private Rigidbody2D Movement;
+    [SerializeField] private string STag;
     private bool isInteracting = false;
 
-
-    private void OnTriggerEnter2D(){
-        isInteracting = true;
-    }
-
-    // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
-        
+        Screen.SetActive(false);
     }
-
-    // Update is called once per frame
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        isInteracting = true;
+        STag = other.name;
+    }
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        isInteracting = false;
+        STag = " ";
+    }
+    
     void Update()
     {
-        // Detect "Z" key press for interaction
-        
-
-        // Call the Interact method when the player interacts
         if ((isInteracting) && (Input.GetKeyDown(KeyCode.Z)))
         {
-            switch(something.tag){
-                case "InteractTextBox":
-                    InteractTextBox();
+            Movement.constraints = RigidbodyConstraints2D.FreezeAll;
+            switch(STag)
+            {
+                case "BulletinBoard":
+                    InteractTextBox(true);
                     break;
                 
-                case "InteractLoadStage":
-                    InteractLoadStage();
+                case "House":
+                    SceneManager.LoadScene(2);
                     break;
+                //Disable_type
+
+                case "BulletinBoardNone":
+                    InteractTextBox(false);
+                    Movement.constraints = RigidbodyConstraints2D.None;
+                    break;
+
+
                 default:
                     print("LOL NO");
+                    Movement.constraints = RigidbodyConstraints2D.None;
                     break;
             }
             
@@ -46,23 +58,17 @@ public class InteractScript : MonoBehaviour
     }
 
     //TOGGLE TEXTBOX FOR NPCs AND SIGNS
-    private void InteractTextBox()
+    private void InteractTextBox(bool x)
     {
-       something.SetActive(true);
-    }
-
-    private void InteractLoadStage(){
-
-    }
-
-    //LOAD NEW SCENE
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("House"))
+        if (x)
         {
-            SceneManager.LoadScene(1);
+            Screen.SetActive(true);
+            STag = "BulletinBoardNone";
+        }
+        else
+        {
+            Screen.SetActive(false);
+            STag = "BulletinBoard";
         }
     }
-
-
 }
