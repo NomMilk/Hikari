@@ -451,8 +451,8 @@ MonoBehaviour:
   speed: 10
   position: {fileID: 649028640}
   Animator: {fileID: 649028637}
-  DashSpeed: 20
-  DashDuration: 0
+  DashSpeed: 40
+  DashDuration: 0.1
   DashDelay: 1
 --- !u!95 &649028637
 Animator:
