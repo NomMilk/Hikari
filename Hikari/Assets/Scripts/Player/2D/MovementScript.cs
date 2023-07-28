@@ -8,9 +8,25 @@ public class MovementScript : MonoBehaviour
     public int speed;
     public SpriteRenderer position;
     public Animator Animator;
+    public int DashSpeed;
+    public float DashDuration;
+
+    //Dash Variables
+    public float DashDelay;
+    private bool CanDash;
+    private bool IsDashing;
+    private float DashSet;
+    private int tempspeed;
+    private float UniversalHorizontal;
 
     private float Horizontal;
 
+    void Start()
+    {
+        CanDash = true;
+        tempspeed = speed;
+        DashSet = 0;
+    }
     void Update()
     {
         Horizontal = Input.GetAxisRaw("Horizontal");
@@ -31,9 +47,48 @@ public class MovementScript : MonoBehaviour
         {
             Animator.SetBool("IsRunning",false);
         }
+
+        if(Input.GetKeyDown(KeyCode.LeftShift)&&(CanDash))
+        {
+            StartCoroutine(Dashing());
+        }
+
+        if (IsDashing == true)
+        {
+            Animator.SetBool("IsDashing",true);
+            UniversalHorizontal = DashSet;
+        }
+        else
+        {
+            Animator.SetBool("IsDashing",false);
+            UniversalHorizontal = Horizontal;
+        }
+    }
+    IEnumerator Dashing()
+    {
+        DashSet = Horizontal;
+        if (DashSet == 0)
+        {
+            if (position.flipX == true)
+            {
+                DashSet = -1;
+            }
+            else
+            {
+                DashSet = 1;
+            }
+        }
+        CanDash = false;
+        IsDashing = true;
+        speed = DashSpeed;
+        yield return new WaitForSeconds(DashDuration);
+        speed = tempspeed;
+        IsDashing = false;
+        yield return new WaitForSeconds(DashDelay);
+        CanDash = true;
     }
     void FixedUpdate()
     {
-        body.velocity = new Vector2 (speed*Horizontal, body.velocity.y);
+        body.velocity = new Vector2 (speed*UniversalHorizontal, body.velocity.y);
     }
 }
