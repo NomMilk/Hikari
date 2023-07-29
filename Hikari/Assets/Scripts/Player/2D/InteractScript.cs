@@ -7,6 +7,7 @@ public class InteractScript : MonoBehaviour
 {
         // Reference to the Renderer of the effect
     [SerializeField] private GameObject Screen;
+    [SerializeField] private GameObject PressE;
     [SerializeField] private Rigidbody2D Movement;
     [SerializeField] private string STag;
     [SerializeField] private Camera Cam;
@@ -16,23 +17,27 @@ public class InteractScript : MonoBehaviour
     public void Start()
     {
         Screen.SetActive(false);
+        PressE.SetActive(false);
         Cam.transform.position = new Vector3(-0.779999971f,0,-10);
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
+        PressE.SetActive(true);
         isInteracting = true;
         STag = other.name;
     }
     private void OnTriggerExit2D(Collider2D other)
     {
+        PressE.SetActive(false);
         isInteracting = false;
         STag = " ";
     }
     
     void Update()
     {
-        if ((isInteracting) && (Input.GetKeyDown(KeyCode.Z)))
+        if ((isInteracting) && (Input.GetKeyDown(KeyCode.E)))
         {
+            PressE.SetActive(false);
             Movement.constraints = RigidbodyConstraints2D.FreezeAll;
             switch(STag)
             {
