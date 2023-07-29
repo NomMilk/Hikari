@@ -22,15 +22,21 @@ public class InteractScript : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        PressE.SetActive(true);
-        isInteracting = true;
-        STag = other.name;
+        if (other.tag != "GroundCheck")
+        {
+            PressE.SetActive(true);
+            isInteracting = true;
+            STag = other.name;
+        }
     }
     private void OnTriggerExit2D(Collider2D other)
     {
-        PressE.SetActive(false);
-        isInteracting = false;
-        STag = " ";
+        if (other.tag != "GroundCheck")
+        {
+            PressE.SetActive(false);
+            isInteracting = false;
+            STag = " ";
+        }
     }
     
     void Update()

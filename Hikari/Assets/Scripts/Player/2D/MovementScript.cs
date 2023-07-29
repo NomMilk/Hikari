@@ -18,8 +18,14 @@ public class MovementScript : MonoBehaviour
     private float DashSet;
     private int tempspeed;
     private float UniversalHorizontal;
-
     private float Horizontal;
+
+    //Jump variables
+    public float jumpForce;
+    public Transform groundCheck;
+    public float groundCheckRadius;
+    public LayerMask whatIsGround;
+    private bool isGrounded;
 
     void Start()
     {
@@ -63,6 +69,15 @@ public class MovementScript : MonoBehaviour
             Animator.SetBool("IsDashing",false);
             UniversalHorizontal = Horizontal;
         }
+        // Jumping
+        if (IsGrounded() && Input.GetKeyDown(KeyCode.Space))
+        {
+            body.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
+        }
+    }
+    private bool IsGrounded()
+    {
+        return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
     }
     IEnumerator Dashing()
     {
