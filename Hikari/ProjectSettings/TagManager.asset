@@ -6,6 +6,7 @@ TagManager:
   tags:
   - House
   - InteractableObject
+  - GroundCheck
   layers:
   - Default
   - TransparentFX
