@@ -280,7 +280,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 770824747, guid: f9226da2ae25bc9408ff69e6c4e1a060, type: 3}
+  m_Sprite: {fileID: 657769889, guid: 5bba2a7af7dda9843b2efe7b8b6e7921, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -324,7 +324,7 @@ MonoBehaviour:
   Animator: {fileID: 209655645}
   DashSpeed: 40
   DashDuration: 0.1
-  DashDelay: 1
+  DashDelay: 0.6
   jumpForce: 10
   groundCheck: {fileID: 209655649}
   groundCheckRadius: 1
