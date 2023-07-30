@@ -22,7 +22,18 @@ public class InteractScript : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag != "GroundCheck")
+        switch(other.tag)
+        {
+            case "Return":
+                SceneManager.LoadScene(0);
+                Destroy(PressE);
+                Destroy(gameObject);
+                break;
+            default:
+                break;
+        }
+        //checktags
+        if (other.tag != "GroundCheck" || other.tag != "Return")
         {
             PressE.SetActive(true);
             isInteracting = true;
@@ -31,7 +42,7 @@ public class InteractScript : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.tag != "GroundCheck")
+        if (other.tag != "GroundCheck"|| other.tag != "Return")
         {
             PressE.SetActive(false);
             isInteracting = false;
@@ -41,7 +52,7 @@ public class InteractScript : MonoBehaviour
     
     void Update()
     {
-        if ((isInteracting) && (Input.GetKeyDown(KeyCode.E)))
+        if ((isInteracting) && (Input.GetKeyDown(KeyCode.E))) //check specific names
         {
             PressE.SetActive(false);
             Movement.constraints = RigidbodyConstraints2D.FreezeAll;
