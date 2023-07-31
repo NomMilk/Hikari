@@ -23,18 +23,14 @@ public class InteractScript : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         SceneTran =  GameObject.Find("SceneManager");
-        switch(other.tag)
+        if (other.tag == "Return")
         {
-            case "Return":
-                SceneTran.SendMessage("StartTran",5);
-                Destroy(PressE);
-                Destroy(gameObject);
-                break;
-            default:
-                break;
+            SceneTran.SendMessage("StartTran",5);
+            Destroy(PressE);
+            Destroy(gameObject);
         }
         //checktags
-        if (other.tag != "GroundCheck" || other.tag != "Return")
+        if (other.tag != "GroundCheck")
         {
             PressE.SetActive(true);
             isInteracting = true;
@@ -43,7 +39,7 @@ public class InteractScript : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.tag != "GroundCheck"|| other.tag != "Return")
+        if (other.tag != "GroundCheck")
         {
             PressE.SetActive(false);
             isInteracting = false;
