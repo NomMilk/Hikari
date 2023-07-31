@@ -9,8 +9,6 @@ public class MapMovement : MonoBehaviour
     public int speed;
     private float Horizontal;
     private float Vertical;
-
-    private bool Jump;
     void Update()
     {
         Horizontal = Input.GetAxisRaw("Horizontal");
@@ -25,7 +23,8 @@ public class MapMovement : MonoBehaviour
     {
         if (other.CompareTag("House"))
         {
-            SceneManager.LoadScene(1);
+        GameObject SceneTran =  GameObject.Find("SceneManager");
+        SceneTran.SendMessage("StartTran",6);
         }
     }
 }

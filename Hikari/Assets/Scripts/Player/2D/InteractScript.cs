@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class InteractScript : MonoBehaviour
 {
@@ -13,6 +12,7 @@ public class InteractScript : MonoBehaviour
     [SerializeField] private Camera Cam;
     [SerializeField] private GameObject player;
     private bool isInteracting = false;
+    private GameObject SceneTran;
 
     public void Start()
     {
@@ -22,10 +22,11 @@ public class InteractScript : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
+        SceneTran =  GameObject.Find("SceneManager");
         switch(other.tag)
         {
             case "Return":
-                SceneManager.LoadScene(0);
+                SceneTran.SendMessage("StartTran",5);
                 Destroy(PressE);
                 Destroy(gameObject);
                 break;
@@ -63,17 +64,11 @@ public class InteractScript : MonoBehaviour
                     break;
                 
                 case "House":
-                    Cam.transform.position = new Vector3(20.4699993f,19.8099995f,-10);
-                    player.transform.position = new Vector3(14.6000004f,18.1499996f,0);
-                    Cam.backgroundColor = Color.black;
-                    Movement.constraints = RigidbodyConstraints2D.None;
+                    StartCoroutine(EnterDoor());
                     break;
 
                 case "Door_Exit":
-                    Cam.transform.position = new Vector3(-0.779999971f,0,-10);
-                    player.transform.position = new Vector3(3.72000003f,-1.94000006f,0);
-                    Cam.backgroundColor = new Color(24f/255f, 23f/255f, 37f/255f , 0f);
-                    Movement.constraints = RigidbodyConstraints2D.None;
+                    StartCoroutine(ExitDoor());
                     break;
                 //Disable_type
 
@@ -105,5 +100,23 @@ public class InteractScript : MonoBehaviour
             Screen.SetActive(false);
             STag = "BulletinBoard";
         }
+    }
+    private IEnumerator EnterDoor()
+    {
+        SceneTran.SendMessage("StartTran",4);
+        yield return new WaitForSeconds(0.3f);
+        Cam.transform.position = new Vector3(20.4699993f,19.8099995f,-10);
+        player.transform.position = new Vector3(14.6000004f,18.1499996f,0);
+        Cam.backgroundColor = Color.black;
+        Movement.constraints = RigidbodyConstraints2D.None;
+    }
+    private IEnumerator ExitDoor()
+    {
+        SceneTran.SendMessage("StartTran",4);
+        yield return new WaitForSeconds(0.3f);
+        Cam.transform.position = new Vector3(-0.779999971f,0,-10);
+        player.transform.position = new Vector3(3.72000003f,-1.94000006f,0);
+        Cam.backgroundColor = new Color(24f/255f, 23f/255f, 37f/255f , 0f);
+        Movement.constraints = RigidbodyConstraints2D.None;
     }
 }
