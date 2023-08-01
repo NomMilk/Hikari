@@ -237,7 +237,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!212 &209655648
 SpriteRenderer:
@@ -322,9 +322,9 @@ MonoBehaviour:
   speed: 10
   position: {fileID: 209655648}
   Animator: {fileID: 209655645}
-  DashSpeed: 40
+  DashSpeed: 30
   DashDuration: 0.1
-  DashDelay: 0.6
+  DashDelay: 0.5
   jumpForce: 10
   groundCheck: {fileID: 209655649}
   groundCheckRadius: 1
