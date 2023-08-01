@@ -13,6 +13,7 @@ public class InteractScript : MonoBehaviour
     [SerializeField] private GameObject player;
     private bool isInteracting = false;
     private GameObject SceneTran;
+    [SerializeField] private Inputs Inputs;
 
     public void Start()
     {
@@ -22,19 +23,19 @@ public class InteractScript : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        SceneTran =  GameObject.Find("SceneManager");
-        if (other.tag == "Return")
+        SceneTran =  GameObject.Find("SceneManager"); //SceneManager controls Scenes + transitions
+        if (other.tag == "Return") //if it touches object with Return tag
         {
-            SceneTran.SendMessage("StartTran",5);
-            Destroy(PressE);
+            SceneTran.SendMessage("StartTran",5); //returns them
+            Destroy(PressE); //also destroy these objects because they will show up when switching scenes
             Destroy(gameObject);
         }
         //checktags
         if (other.tag != "GroundCheck")
         {
-            PressE.SetActive(true);
+            PressE.SetActive(true); //Press E is the small thing on bottom right, should be called just E in hierarchy
             isInteracting = true;
-            STag = other.name;
+            STag = other.name; //Take the name for switch statemetns
         }
     }
     private void OnTriggerExit2D(Collider2D other)
@@ -49,10 +50,11 @@ public class InteractScript : MonoBehaviour
     
     void Update()
     {
-        if ((isInteracting) && (Input.GetKeyDown(KeyCode.E))) //check specific names
+        if ((isInteracting) && Inputs.Interact) //check specific names
         {
             PressE.SetActive(false);
             Movement.constraints = RigidbodyConstraints2D.FreezeAll;
+            //REMEMBER LINE 37??? because look down
             switch(STag)
             {
                 case "BulletinBoard":

@@ -10,13 +10,20 @@ public class PlayerEffect : MonoBehaviour
     [SerializeField] private float Frequency;
     [SerializeField] private float Lowest;
 
-    private float Transparency;
+    [SerializeField] private Inputs Inputs;
 
-    void Start()
-    {
-    }
+    private float Transparency;
     void Update()
     {
+        if (Inputs.Direction > 0)
+        {
+            Renderer.flipX = false;
+        }
+
+        else if (Inputs.Direction < 0)
+        {
+            Renderer.flipX = true;
+        }
         Transparency = Mathf.Sin(Time.time*Frequency)*Intensity+Lowest;
         Vector4 NewColor = new Vector4 (Renderer.color.r,Renderer.color.b,Renderer.color.g,Transparency);
         Renderer.color = NewColor;

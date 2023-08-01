@@ -139,6 +139,7 @@ GameObject:
   - component: {fileID: 209655650}
   - component: {fileID: 209655651}
   - component: {fileID: 209655652}
+  - component: {fileID: 209655653}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -331,6 +332,7 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8
+  Inputs: {fileID: 209655653}
 --- !u!114 &209655651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -347,6 +349,7 @@ MonoBehaviour:
   Intensity: 0.4
   Frequency: 1
   Lowest: 0.5
+  Inputs: {fileID: 209655653}
 --- !u!114 &209655652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -365,6 +368,23 @@ MonoBehaviour:
   STag: 
   Cam: {fileID: 519420031}
   player: {fileID: 209655644}
+  Inputs: {fileID: 209655653}
+--- !u!114 &209655653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 209655644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9702882bf7ddeea41ab61b5c020ecb89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Direction: 0
+  Dash: 0
+  Jump: 0
+  Interact: 0
 --- !u!1 &406639292
 GameObject:
   m_ObjectHideFlags: 0

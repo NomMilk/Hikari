@@ -18,7 +18,6 @@ public class MovementScript : MonoBehaviour
     private float DashSet;
     private float tempspeed;
     private float UniversalHorizontal;
-    private float Horizontal;
 
     //Jump variables
     public float jumpForce;
@@ -26,6 +25,9 @@ public class MovementScript : MonoBehaviour
     public float groundCheckRadius;
     public LayerMask whatIsGround;
     private bool isGrounded;
+
+    //Inputs
+    [SerializeField] private Inputs Inputs;
 
     void Start()
     {
@@ -35,18 +37,15 @@ public class MovementScript : MonoBehaviour
     }
     void Update()
     {
-        Horizontal = Input.GetAxisRaw("Horizontal");
 
-        if (Horizontal > 0)
+        if (Inputs.Direction > 0)
         {
-            position.flipX = false;
             Animator.SetBool("IsRunning",true);
 
         }
 
-        else if (Horizontal < 0)
+        else if (Inputs.Direction < 0)
         {
-            position.flipX = true;
             Animator.SetBool("IsRunning",true);
         }
         else
@@ -54,7 +53,7 @@ public class MovementScript : MonoBehaviour
             Animator.SetBool("IsRunning",false);
         }
 
-        if(Input.GetKeyDown(KeyCode.LeftShift)&&(CanDash))
+        if(Inputs.Dash && (CanDash))
         {
             StartCoroutine(Dashing());
         }
@@ -67,10 +66,10 @@ public class MovementScript : MonoBehaviour
         else
         {
             Animator.SetBool("IsDashing",false);
-            UniversalHorizontal = Horizontal;
+            UniversalHorizontal = Inputs.Direction;
         }
         // Jumping
-        if (IsGrounded() && Input.GetKeyDown(KeyCode.Space))
+        if (IsGrounded() && Inputs.Jump)
         {
             body.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
         }
@@ -81,7 +80,7 @@ public class MovementScript : MonoBehaviour
     }
 IEnumerator Dashing()
 {
-    DashSet = Horizontal;
+    DashSet = Inputs.Direction;
     if (DashSet == 0)
     {
         if (position.flipX == true)
