@@ -21,14 +21,14 @@ public class InteractScript : MonoBehaviour
         PressE.SetActive(false);
         Cam.transform.position = new Vector3(-0.779999971f,0,-10);
     }
-    private void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         SceneTran =  GameObject.Find("SceneManager"); //SceneManager controls Scenes + transitions
         if (other.tag == "Return") //if it touches object with Return tag
         {
-            SceneTran.SendMessage("StartTran",5); //returns them
-            Destroy(PressE); //also destroy these objects because they will show up when switching scenes
-            Destroy(gameObject);
+            SceneTran.SendMessage("StartTran",6); //returns them
+            Destroy(PressE);
+            Destroy(transform.parent.gameObject);
         }
         //checktags
         if (other.tag != "GroundCheck")
@@ -38,7 +38,7 @@ public class InteractScript : MonoBehaviour
             STag = other.name; //Take the name for switch statemetns
         }
     }
-    private void OnTriggerExit2D(Collider2D other)
+    void OnTriggerExit2D(Collider2D other)
     {
         if (other.tag != "GroundCheck")
         {

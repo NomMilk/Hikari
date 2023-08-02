@@ -9,10 +9,6 @@ public class Inputs : MonoBehaviour
     public bool Jump;
     public bool Interact;
     public bool Attack;
-    void Start()
-    {
-        DontDestroyOnLoad(gameObject);
-    }
     void Update()
     {
         //WASD

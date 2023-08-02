@@ -59,7 +59,7 @@ public class MapMovement : MonoBehaviour
         if (other.CompareTag("House"))
         {
         GameObject SceneTran =  GameObject.Find("SceneManager");
-        SceneTran.SendMessage("StartTran",6);
+        SceneTran.SendMessage("StartTran",7);
         }
     }
 }

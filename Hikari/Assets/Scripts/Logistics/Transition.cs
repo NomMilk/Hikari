@@ -8,7 +8,7 @@ public class transition : MonoBehaviour
     public GameObject ETransitionBlack;
     public GameObject STransitionBlack;
 
-    public void Start()
+    public void Awake()
     {
         DontDestroyOnLoad(gameObject);
     }
@@ -16,20 +16,6 @@ public class transition : MonoBehaviour
     {
         x = x-5;
         StartCoroutine(LoadSceneAfterTransition(x));
-    }
-
-    public void HalfTran()
-    {
-        ETransitionBlack.transform.localScale = new Vector3(1, 1, 1);
-        STransitionBlack.transform.localScale = new Vector3(1, 1, 1);
-        LeanTween.scaleX(STransitionBlack, 18, 0.3f);
-    }
-
-    public void EndTran()
-    {
-        ETransitionBlack.transform.localScale = new Vector3(18, 1, 1);
-        STransitionBlack.transform.localScale = new Vector3(1, 1, 1);
-        LeanTween.scaleX(ETransitionBlack, 1, 0.3f);
     }
 
     private IEnumerator LoadSceneAfterTransition(int x)
