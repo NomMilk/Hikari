@@ -7,14 +7,13 @@ public class MovementScript : MonoBehaviour
     public Rigidbody2D body;
     public float speed;
     public SpriteRenderer position;
-    public Animator Animator;
     public float DashSpeed;
     public float DashDuration;
 
     //Dash Variables
     public float DashDelay;
     private bool CanDash;
-    private bool IsDashing;
+    public bool IsDashing;
     private float DashSet;
     private float tempspeed;
     private float UniversalHorizontal;
@@ -39,18 +38,6 @@ public class MovementScript : MonoBehaviour
     {
         if (Inputs.Player_State == "Movement")
         {
-            if (Inputs.Direction > 0)
-            {
-                Animator.SetBool("IsRunning",true);
-            }
-            else if (Inputs.Direction < 0)
-            {
-                Animator.SetBool("IsRunning",true);
-            }
-            else
-            {
-                Animator.SetBool("IsRunning",false);
-            }
 
             if(Inputs.Dash && (CanDash))
             {
@@ -59,12 +46,10 @@ public class MovementScript : MonoBehaviour
 
             if (IsDashing == true)
             {
-                Animator.SetBool("IsDashing",true);
                 UniversalHorizontal = DashSet;
             }
             else
             {
-                Animator.SetBool("IsDashing",false);
                 UniversalHorizontal = Inputs.Direction;
             }
         // Jumping
