@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class DamageScript : MonoBehaviour
 {
-
-//i don't feel like fjeaiofjeoajnfoe
+    public int Damage;
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Attackable")
+        {
+            print("Attacked");
+        }
+    }
 }

@@ -8,6 +8,7 @@ TagManager:
   - InteractableObject
   - GroundCheck
   - Return
+  - Attackable
   layers:
   - Default
   - TransparentFX

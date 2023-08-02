@@ -15,6 +15,8 @@ public class InteractScript : MonoBehaviour
     private GameObject SceneTran;
     [SerializeField] private Inputs Inputs;
 
+    [SerializeField]private string[] BannedTags;
+
     public void Start()
     {
         Screen.SetActive(false);
@@ -24,6 +26,17 @@ public class InteractScript : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         SceneTran =  GameObject.Find("SceneManager"); //SceneManager controls Scenes + transitions
+        //sort if tag is a banned tag
+        bool isTagBanned = false;
+        foreach (string bannedTag in BannedTags)
+        {
+            if (other.tag == bannedTag)
+            {
+                isTagBanned = true;
+                break;
+            }
+        }
+        //end sort
         if (other.tag == "Return") //if it touches object with Return tag
         {
             SceneTran.SendMessage("StartTran",6); //returns them
@@ -31,7 +44,7 @@ public class InteractScript : MonoBehaviour
             Destroy(transform.parent.gameObject);
         }
         //checktags
-        if (other.tag != "GroundCheck")
+        if (isTagBanned == false)
         {
             PressE.SetActive(true); //Press E is the small thing on bottom right, should be called just E in hierarchy
             isInteracting = true;
