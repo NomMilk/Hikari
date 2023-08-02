@@ -36,27 +36,24 @@ public class MovementScript : MonoBehaviour
     }
     void Update()
     {
-        if (Inputs.Player_State == "Movement")
+
+        if(Inputs.Dash && (CanDash))
         {
+            StartCoroutine(Dashing());
+        }
 
-            if(Inputs.Dash && (CanDash))
-            {
-                StartCoroutine(Dashing());
-            }
-
-            if (IsDashing == true)
-            {
-                UniversalHorizontal = DashSet;
-            }
-            else
-            {
-                UniversalHorizontal = Inputs.Direction;
-            }
+        if (IsDashing == true)
+        {
+            UniversalHorizontal = DashSet;
+        }
+        else
+        {
+            UniversalHorizontal = Inputs.Direction;
+        }
         // Jumping
-            if (IsGrounded() && Inputs.Jump)
-            {
-                body.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
-            }
+        if (IsGrounded() && Inputs.Jump)
+        {
+            body.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
         }
     }
     private bool IsGrounded()

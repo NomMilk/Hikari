@@ -5,14 +5,12 @@ using UnityEngine;
 public class Inputs : MonoBehaviour
 {
     public float Direction;
-    public string Player_State;
     public bool Dash;
     public bool Jump;
     public bool Interact;
     public bool Attack;
     void Start()
     {
-        Player_State = "Movement";
         DontDestroyOnLoad(gameObject);
     }
     void Update()
