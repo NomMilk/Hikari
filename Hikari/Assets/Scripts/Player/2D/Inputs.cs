@@ -5,11 +5,14 @@ using UnityEngine;
 public class Inputs : MonoBehaviour
 {
     public float Direction;
+    public string Player_State;
     public bool Dash;
     public bool Jump;
     public bool Interact;
+    public bool Attack;
     void Start()
     {
+        Player_State = "Movement";
         DontDestroyOnLoad(gameObject);
     }
     void Update()
@@ -42,6 +45,15 @@ public class Inputs : MonoBehaviour
         else
         {
             Interact = false;
+        }
+        //Attack
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            Attack = true;
+        }
+        else
+        {
+            Attack = false;
         }
     }
 }

@@ -37,41 +37,41 @@ public class MovementScript : MonoBehaviour
     }
     void Update()
     {
+        if (Inputs.Player_State == "Movement")
+        {
+            if (Inputs.Direction > 0)
+            {
+                Animator.SetBool("IsRunning",true);
+            }
+            else if (Inputs.Direction < 0)
+            {
+                Animator.SetBool("IsRunning",true);
+            }
+            else
+            {
+                Animator.SetBool("IsRunning",false);
+            }
 
-        if (Inputs.Direction > 0)
-        {
-            Animator.SetBool("IsRunning",true);
+            if(Inputs.Dash && (CanDash))
+            {
+                StartCoroutine(Dashing());
+            }
 
-        }
-
-        else if (Inputs.Direction < 0)
-        {
-            Animator.SetBool("IsRunning",true);
-        }
-        else
-        {
-            Animator.SetBool("IsRunning",false);
-        }
-
-        if(Inputs.Dash && (CanDash))
-        {
-            StartCoroutine(Dashing());
-        }
-
-        if (IsDashing == true)
-        {
-            Animator.SetBool("IsDashing",true);
-            UniversalHorizontal = DashSet;
-        }
-        else
-        {
-            Animator.SetBool("IsDashing",false);
-            UniversalHorizontal = Inputs.Direction;
-        }
+            if (IsDashing == true)
+            {
+                Animator.SetBool("IsDashing",true);
+                UniversalHorizontal = DashSet;
+            }
+            else
+            {
+                Animator.SetBool("IsDashing",false);
+                UniversalHorizontal = Inputs.Direction;
+            }
         // Jumping
-        if (IsGrounded() && Inputs.Jump)
-        {
-            body.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
+            if (IsGrounded() && Inputs.Jump)
+            {
+                body.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
+            }
         }
     }
     private bool IsGrounded()
