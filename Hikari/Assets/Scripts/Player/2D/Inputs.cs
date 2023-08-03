@@ -41,12 +41,14 @@ public class Inputs : MonoBehaviour
             Interact = false;
         }
         //Attack
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKey(KeyCode.Mouse0))
+        {
+            StartCoroutine(Attacking());
+        }
+        IEnumerator Attacking()
         {
             Attack = true;
-        }
-        else
-        {
+            yield return new WaitForSeconds(1);
             Attack = false;
         }
     }

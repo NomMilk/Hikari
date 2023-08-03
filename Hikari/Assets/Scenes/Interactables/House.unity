@@ -857,6 +857,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 0
+  Inputs: {fileID: 209655653}
 --- !u!50 &632884791
 Rigidbody2D:
   serializedVersion: 4
@@ -1877,6 +1878,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 0
+  Inputs: {fileID: 209655653}
 --- !u!50 &1559193545
 Rigidbody2D:
   serializedVersion: 4
