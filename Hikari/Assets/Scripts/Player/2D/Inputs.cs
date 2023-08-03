@@ -43,12 +43,10 @@ public class Inputs : MonoBehaviour
         //Attack
         if (Input.GetKey(KeyCode.Mouse0))
         {
-            StartCoroutine(Attacking());
-        }
-        IEnumerator Attacking()
-        {
             Attack = true;
-            yield return new WaitForSeconds(1);
+        }
+        else
+        {
             Attack = false;
         }
     }

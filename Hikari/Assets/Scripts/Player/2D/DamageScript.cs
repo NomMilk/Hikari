@@ -9,21 +9,21 @@ public class DamageScript : MonoBehaviour
     [SerializeField] Inputs Inputs;
     [SerializeField] Animator Animator;
 
-    private bool Attacking;
+    [SerializeField] private bool Attacking;
     private bool IsIdle;
     
     void Start()
     {
-        Damage = 50;
+        Damage = 10;
         SetDamage = Damage;
         Attacking = false;
     }
-    void Update()
+    void FixedUpdate()
     {
         IsIdle = !Animator.GetBool("IsRunning");
         if (IsIdle == true)
         {
-            Damage = SetDamage+20;
+            Damage = SetDamage+10;
         }
         else
         {
