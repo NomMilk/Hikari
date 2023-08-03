@@ -32,12 +32,10 @@ public class Player_Animator : MonoBehaviour
         }
         if (Inputs.Attack == true)
         {
-            StartCoroutine(Attacking());
-        }
-        IEnumerator Attacking()
-        {
             Animator.SetBool("IsAttacking",true);
-            yield return new WaitForSeconds(0.4f);
+        }
+        else
+        {
             Animator.SetBool("IsAttacking",false);
         }
     }

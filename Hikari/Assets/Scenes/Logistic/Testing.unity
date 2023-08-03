@@ -156,7 +156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Damage: 0
   Inputs: {fileID: 1695598438}
-  Attacking: 0
+  Animator: {fileID: 1695598443}
 --- !u!50 &187559307
 Rigidbody2D:
   serializedVersion: 4
@@ -639,7 +639,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Damage: 0
   Inputs: {fileID: 1695598438}
-  Attacking: 0
+  Animator: {fileID: 1695598443}
 --- !u!61 &1430865844
 BoxCollider2D:
   m_ObjectHideFlags: 0
