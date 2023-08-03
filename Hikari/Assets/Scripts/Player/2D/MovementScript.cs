@@ -23,7 +23,8 @@ public class MovementScript : MonoBehaviour
     public Transform groundCheck;
     public float groundCheckRadius;
     public LayerMask whatIsGround;
-    private bool isGrounded;
+    public bool InAir;
+
 
     //Inputs
     [SerializeField] private Inputs Inputs;
@@ -55,8 +56,16 @@ public class MovementScript : MonoBehaviour
         {
             body.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
         }
+        if(Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround))
+        {
+            InAir = true;
+        }
+        else
+        {
+            InAir = false;
+        }
     }
-    private bool IsGrounded()
+    public bool IsGrounded()
     {
         return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
     }

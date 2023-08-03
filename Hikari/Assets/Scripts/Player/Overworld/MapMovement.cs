@@ -11,11 +11,18 @@ public class MapMovement : MonoBehaviour
     [SerializeField] SpriteRenderer Renderer;
     private float Horizontal;
     private float Vertical;
+    private GameObject SoundManager;
 
+    void Start()
+    {
+        SoundManager =  GameObject.Find("SoundManager");
+        SoundManager.SendMessage("StopPunch");
+    }
     void Update()
     {
-        Horizontal = Input.GetAxisRaw("Horizontal");
+        Horizontal = Input.GetAxisRaw("Horizontal");//I AM THE BEST OF THE BEST IN TERMS OF PROGRAMING PROESS
         Vertical = Input.GetAxisRaw("Vertical");
+        SoundManager.SendMessage("PlayWalk",true);
         if (Vertical > 0)
         {
             Animation.SetBool("MovingUp", true);
@@ -47,6 +54,7 @@ public class MapMovement : MonoBehaviour
             Animation.SetBool("MovingSide", false);
             Animation.SetBool("MovingUp", false);
             Animation.SetBool("MovingDown", false);
+            SoundManager.SendMessage("PlayWalk",false);
         }
     }
     void FixedUpdate()
