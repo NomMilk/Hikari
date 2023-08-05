@@ -9,6 +9,7 @@ TagManager:
   - GroundCheck
   - Return
   - Attackable
+  - Pain
   layers:
   - Default
   - TransparentFX
