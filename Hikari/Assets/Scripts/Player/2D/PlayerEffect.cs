@@ -1,31 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 
 public class PlayerEffect : MonoBehaviour
 {
-    [SerializeField] private SpriteRenderer Renderer;
-    [SerializeField] private float Intensity;
-    [SerializeField] private float Frequency;
-    [SerializeField] private float Lowest;
+    [SerializeField] private SpriteRenderer renderer;
+    [SerializeField] private float intensity;
+    [SerializeField] private float frequency;
+    [SerializeField] private float lowest;
+    [SerializeField] private Inputs inputs;
 
-    [SerializeField] private Inputs Inputs;
-
-    private float Transparency;
-    void Update()
+    private void Update()
     {
-        if (Inputs.Direction > 0)
-        {
-            Renderer.flipX = false;
-        }
+        renderer.flipX = inputs.Direction < 0;
 
-        else if (Inputs.Direction < 0)
-        {
-            Renderer.flipX = true;
-        }
-        Transparency = Mathf.Sin(Time.time*Frequency)*Intensity+Lowest;
-        Vector4 NewColor = new Vector4 (Renderer.color.r,Renderer.color.b,Renderer.color.g,Transparency);
-        Renderer.color = NewColor;
+        float transparency = Mathf.Sin(Time.time * frequency) * intensity + lowest;
+        Color newColor = renderer.color;
+        newColor.a = transparency;
+        renderer.color = newColor;
     }
 }
